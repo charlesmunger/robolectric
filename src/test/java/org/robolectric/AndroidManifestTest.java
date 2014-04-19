@@ -205,7 +205,7 @@ public class AndroidManifestTest {
     assertEquals("@string/app_name", metaValue);
   }
   
-  @Test public void shouldLoadAllResourcesForExistingLibraries() {
+  @Test public void shouldLoadAllResourcesForExistingLibraries() throws Exception {
     AndroidManifest appManifest = new AndroidManifest(resourceFile("TestAndroidManifest.xml"), resourceFile("res"));
 
     // This intentionally loads from the non standard resources/project.properties
@@ -213,7 +213,7 @@ public class AndroidManifestTest {
     assertEquals(asList(
         joinPath(".", "src", "test", "resources", "res"),
         joinPath(".", "src", "test", "resources", "lib1", "res"),
-        joinPath(".", "src", "test", "resources", "lib1", "..", "lib3", "res"),
+        joinPath(".", "src", "test", "resources", "lib3", "res"),
         joinPath(".", "src", "test", "resources", "lib2", "res")),
         resourcePaths);
   }

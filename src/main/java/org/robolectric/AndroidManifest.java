@@ -14,12 +14,15 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
 import java.util.Properties;
+import java.util.Set;
 
 import static android.content.pm.ApplicationInfo.FLAG_ALLOW_BACKUP;
 import static android.content.pm.ApplicationInfo.FLAG_ALLOW_CLEAR_USER_DATA;
@@ -441,7 +444,7 @@ public class AndroidManifest {
 
   protected void createLibraryManifests() {
     libraryManifests = new ArrayList<AndroidManifest>();
-    List<FsFile> libraryBaseDirs = findLibraries();
+    Collection<FsFile> libraryBaseDirs = findLibraries();
 
     for (FsFile libraryBaseDir : libraryBaseDirs) {
       AndroidManifest libraryManifest = createLibraryAndroidManifest(libraryBaseDir);
@@ -450,9 +453,9 @@ public class AndroidManifest {
     }
   }
 
-  protected List<FsFile> findLibraries() {
+  protected Collection<FsFile> findLibraries() {
     FsFile baseDir = getBaseDir();
-    List<FsFile> libraryBaseDirs = new ArrayList<FsFile>();
+    Set<FsFile> libraryBaseDirs = new HashSet<FsFile>();
 
     Properties properties = getProperties(baseDir.join("project.properties"));
     // get the project.properties overrides and apply them (if any)

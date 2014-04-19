@@ -135,13 +135,13 @@ public abstract class TestUtil {
     return writer.toString();
   }
 
-  public static String joinPath(String... parts) {
+  public static String joinPath(String... parts) throws IOException {
     File file = new File(parts[0]);
     for (int i = 1; i < parts.length; i++) {
       String part = parts[i];
       file = new File(file, part);
     }
-    return file.getPath();
+    return file.getCanonicalPath();
   }
 
   public static Resources createResourcesFor(ResourceLoader resourceLoader) {
